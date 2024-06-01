@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BugTracker.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="Notification" />
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h1 class="text-primary">Ticket List</h1>
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="Tickets" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Submit a Ticket</a>
+        </div>
+
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ticketTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticketDesc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticketTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticketDesc)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
